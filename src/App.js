@@ -1,8 +1,25 @@
 import './App.css';
+import React,{useState, useEffect} from 'react';
+
 
 function App() {
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [togglePasswordButton, setTogglePasswordButton] = useState(false);
 
+  const handleShowPassword = (e) => {
+    e.preventDefault();
+    setShowPassword(!showPassword);
+    document.getElementById("password").focus();
+  }
+
+  const handleBlur = (e) => {
+    const buttonTarget = e.relatedTarget && e.relatedTarget.id == "show-password";
+    if (!buttonTarget){
+      setShowPassword(false);
+      setTogglePasswordButton(false);
+    }
+  }
 
   return (
     <>
@@ -22,13 +39,16 @@ function App() {
               <div className="error">Lütfen geçerli bir telefon numarası veya e-posta adresi girin.</div>
             </div>
             <div className="inputGroup">
-              <div className="inputContainer">
-                <input className="form-input" id="password" type="password" autoComplete='none' required />
+              <div className="inputContainer" id="passwordContainer">
+                <input className="form-input" id="password" type={showPassword ? "text" : "password"} autoComplete='none' required 
+                    onFocus={() => setTogglePasswordButton(true)} onBlur={handleBlur}/>
                 <label className="form-label" htmlFor="password">Parola</label>
+                <button id="show-password" style={{display: togglePasswordButton ? 'block' : 'none' }}
+                  onClick={(handleShowPassword)} className="show-password">{showPassword ? "GİZLE" : "GÖSTER"}</button>
               </div>
               <div className="error">Parola 4 ile 60 karakter olmalıdır.</div>
             </div>
-            <button>Oturum Aç</button>
+            <button type="button">Oturum Aç</button>
             <div className="infoContainer">
               <div className='rememberMe'>
                 <input type="checkbox" />Beni Hatırla

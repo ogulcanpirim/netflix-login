@@ -22,7 +22,7 @@ body {
 
 .loginForm {
   max-width: 314px;
-  height: 604px;
+  min-height: 604px;
   height: max-content;
   background-color: #000000bb;
   align-self: center;
@@ -38,6 +38,8 @@ body {
 
 .inputContainer:focus-within{
   background-color: #444444;
+  display: flex;
+  flex-direction: row;
 }
 
 .inputContainer {
@@ -93,7 +95,7 @@ input:valid ~ .form-label {
 
 
 
-button{
+button[type="button"]{
   padding: 16px;
   background-color: #e50914;
   margin: 24px 0px 12px;
@@ -173,6 +175,10 @@ label{
   text-decoration: none;
 }
 
+.signup-text:hover{
+  text-decoration: underline;
+}
+
 .recaptcha {
   margin: 13px 0px;
   color: #8c8c8c;
@@ -188,6 +194,34 @@ label{
 .learn-more:hover {
   text-decoration: underline;
 }
+
+.show-password{
+  position: absolute;
+  color: #8c8c8c;
+  font-size: 14px;
+  right: 10px;
+  align-self: center;
+  cursor: pointer;
+}
+
+#passwordContainer {
+  display: flex;
+}
+
+#passwordContainer:focus-within ~ .show-password {
+  position: absolute;
+  color: #8c8c8c;
+  font-size: 14px;
+  right: 10px;
+  align-self: center;
+  cursor: pointer;
+}
+
+button {
+  border: none;
+  background: transparent;
+}
+
 
 .header {
   margin: 25px;
