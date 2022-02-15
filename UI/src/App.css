@@ -94,8 +94,7 @@ input:valid ~ .form-label {
 }
 
 
-
-button[type="button"]{
+button[type="submit"]{
   padding: 16px;
   background-color: #e50914;
   margin: 24px 0px 12px;
