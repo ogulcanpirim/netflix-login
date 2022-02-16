@@ -44,10 +44,11 @@ export default function SignIn() {
     const provider = new FacebookAuthProvider();
     signInWithPopup(auth, provider)
       .then((response) => {
-        console.log(response);
+        console.log("response", response);
       })
       .catch((error) => {
-        console.log(error);
+        const errorCode = error.code;
+        console.log("errorCode", errorCode);
       })
   }
 
@@ -76,8 +77,8 @@ export default function SignIn() {
           setValidMessage("Parola yanlış. Lütfen yeniden deneyin ya da parolanızı sıfırlayın");
         }
 
-        else if (errorCode.includes("invalid-email")){
-          setValidMessage("Bu e‑posta adresi ile bağlantılı bir hesap bulamadık. Lütfen yeniden deneyin ya da yeni bir hesap oluşturun.");
+        else if (errorCode.includes("invalid-email") || errorCode.includes("user-not-found")){
+          setValidMessage("Bu e-posta adresi ile bağlantılı bir hesap bulamadık. Lütfen yeniden deneyin ya da yeni bir hesap oluşturun.");
         }
         setLoading(false);
         
