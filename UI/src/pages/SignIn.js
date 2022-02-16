@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import '../styles/SignIn.css';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
 
 export default function SignIn() {
 
@@ -16,6 +16,10 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [togglePasswordButton, setTogglePasswordButton] = useState(false);
 
+
+  //auth
+  const auth = getAuth();
+
   const handleShowPassword = (e) => {
     e.preventDefault();
     setShowPassword(!showPassword);
@@ -30,18 +34,30 @@ export default function SignIn() {
     }
   }
 
-  const handleSubmit = React.useCallback(async (e) => {
+  const signInWithFacebook = () => {
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth,provider)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
 
     const emailError = emailPhone.length < 5;
     const passwordError = password.length < 4 || password.length > 60;
+    const remember = e.target.rememberMe.checked;
 
     if (!emailError && !passwordError) {
       console.log("emailPhone: " + emailPhone);
       console.log("password: " + password);
       setErrorEmail(false);
       setErrorPassword(false);
-      const auth = getAuth()
+      
       try {
         await signInWithEmailAndPassword(auth, emailPhone, password)
       } catch (err) {
@@ -84,12 +100,12 @@ export default function SignIn() {
             <button type="submit" formNoValidate>Oturum Aç</button>
             <div className="infoContainer">
               <div className='rememberMe'>
-                <input type="checkbox" />Beni Hatırla
+                <input id="rememberMe" type="checkbox" />Beni Hatırla
               </div>
               <a className="help" href="/">Yardım ister misiniz?</a>
             </div>
           </form>
-          <a href="/" className="fb-block">
+          <a onClick={signInWithFacebook} className="fb-block">
             <img className="fb-logo" src="https://assets.nflxext.com/ffe/siteui/login/images/FB-f-Logo__blue_57.png" alt="facebook-logo" />
             <div className='fb-text'>Facebook ile Oturum Aç</div>
           </a>
