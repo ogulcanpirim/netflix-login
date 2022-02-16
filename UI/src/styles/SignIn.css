@@ -224,4 +224,14 @@ body {
   
   .header {
     margin: 25px;
-  }   
+  }
+
+
+  .messageContainer {
+    background-color: #e87c03;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #fff;
+    margin-bottom: 16px;
+  }

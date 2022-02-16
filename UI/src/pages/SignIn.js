@@ -1,6 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import '../styles/SignIn.css';
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
+import { Spinner } from "react-activity";
+import "react-activity/dist/library.css";
+
 
 export default function SignIn() {
 
@@ -11,14 +14,17 @@ export default function SignIn() {
   //errors
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
+  const [validMessage, setValidMessage] = useState("");
 
   //show/hide password
   const [showPassword, setShowPassword] = useState(false);
   const [togglePasswordButton, setTogglePasswordButton] = useState(false);
 
-
   //auth
   const auth = getAuth();
+
+  //loading
+  const [loading, setLoading] = useState(false);
 
   const handleShowPassword = (e) => {
     e.preventDefault();
@@ -36,17 +42,18 @@ export default function SignIn() {
 
   const signInWithFacebook = () => {
     const provider = new FacebookAuthProvider();
-    signInWithPopup(auth,provider)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+    signInWithPopup(auth, provider)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const emailError = emailPhone.length < 5;
     const passwordError = password.length < 4 || password.length > 60;
@@ -57,17 +64,31 @@ export default function SignIn() {
       console.log("password: " + password);
       setErrorEmail(false);
       setErrorPassword(false);
-      
+
       try {
-        await signInWithEmailAndPassword(auth, emailPhone, password)
+        await signInWithEmailAndPassword(auth, emailPhone, password);
       } catch (err) {
-        console.log(err);
+        
+        const errorCode = err.code;
+        
+        console.log("errorCode: " + errorCode);
+        if (errorCode.includes("wrong-password")){
+          setValidMessage("Parola yanlış. Lütfen yeniden deneyin ya da parolanızı sıfırlayın");
+        }
+
+        else if (errorCode.includes("invalid-email")){
+          setValidMessage("Bu e‑posta adresi ile bağlantılı bir hesap bulamadık. Lütfen yeniden deneyin ya da yeni bir hesap oluşturun.");
+        }
+        setLoading(false);
+        
       }
     }
     else {
       setErrorEmail(emailError);
       setErrorPassword(passwordError);
     }
+
+    setLoading(false);
   }, [emailPhone, password]);
 
   return (
@@ -79,6 +100,7 @@ export default function SignIn() {
 
         <div className="loginForm">
           <h1>Oturum Aç</h1>
+          {validMessage && <div className='messageContainer'>{validMessage}</div>}
           <form autoComplete='off' onSubmit={handleSubmit}>
             <div className="inputGroup">
               <div className="inputContainer" style={{ borderBottom: errorEmail ? '3px solid #e87c03' : 'none' }}>
@@ -97,7 +119,7 @@ export default function SignIn() {
               </div>
               {errorPassword ? <div className="error">Parola 4 ile 60 karakter olmalıdır.</div> : undefined}
             </div>
-            <button type="submit" formNoValidate>Oturum Aç</button>
+            <button disabled={loading} type="submit" formNoValidate>{loading ? <Spinner style={{ margin: 'auto' }} /> : "Oturum Aç"}</button>
             <div className="infoContainer">
               <div className='rememberMe'>
                 <input id="rememberMe" type="checkbox" />Beni Hatırla
