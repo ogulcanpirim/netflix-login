@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect} from 'react';
+
 import '../styles/SignIn.css';
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
-
 
 export default function SignIn() {
 
@@ -39,6 +39,49 @@ export default function SignIn() {
       setTogglePasswordButton(false);
     }
   }
+ 
+  const rememberUser = (remember) => {
+    if (remember === true) {
+      try {
+         localStorage.setItem('Username', emailPhone);
+         localStorage.setItem('Password', password);
+      } catch (error) {
+      }
+      }if(remember === false)
+      try {
+       localStorage.removeItem('Username');
+       localStorage.removeItem('Password');
+      } catch (error) {
+      
+      }
+
+    
+  }
+
+  const getRememberedUsername = () => {
+    try {
+      const username = localStorage.getItem('Username');
+      if (username !== null )
+        return username;
+      else
+        return "";
+    } catch (error) {
+      return "";
+    }
+  }
+  
+
+  const getRememberedPassword = () => {
+    try {
+      const password = localStorage.getItem('Password');
+      if (password !== null )
+        return password;
+      else
+        return "";
+    } catch (error) {
+      return "";
+    }
+  }
 
   const signInWithFacebook = () => {
     const provider = new FacebookAuthProvider();
@@ -52,6 +95,8 @@ export default function SignIn() {
       })
   }
 
+ 
+
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -59,6 +104,8 @@ export default function SignIn() {
     const emailError = emailPhone.length < 5;
     const passwordError = password.length < 4 || password.length > 60;
     const remember = e.target.rememberMe.checked;
+    rememberUser(remember);
+   
 
     if (!emailError && !passwordError) {
       console.log("emailPhone: " + emailPhone);
@@ -92,6 +139,11 @@ export default function SignIn() {
     setLoading(false);
   }, [emailPhone, password]);
 
+  useEffect(() => {
+    setEmailPhone(getRememberedUsername());
+    setPassword(getRememberedPassword());
+  }, []);
+
   return (
     <>
       <div className="App">
@@ -105,7 +157,7 @@ export default function SignIn() {
           <form autoComplete='off' onSubmit={handleSubmit}>
             <div className="inputGroup">
               <div className="inputContainer" style={{ borderBottom: errorEmail ? '3px solid #e87c03' : 'none' }}>
-                <input className="form-input" id="email_phone" type="text" autoComplete='off' required value={emailPhone} onChange={e => setEmailPhone(e.target.value)} noValidate="" />
+                <input className="form-input" id="email_phone" type="text" autoComplete='off' required value={emailPhone} onChange={e => setEmailPhone(e.target.value)} noValidate=""/>
                 <label className="form-label" htmlFor="email_phone">E-posta veya telefon numarası</label>
               </div>
               {errorEmail ? <div className="error">Lütfen geçerli bir telefon numarası veya e-posta adresi girin.</div> : undefined}
@@ -113,7 +165,7 @@ export default function SignIn() {
             <div className="inputGroup">
               <div className="inputContainer" id="passwordContainer" style={{ borderBottom: errorPassword ? '3px solid #e87c03' : 'none' }}>
                 <input className="form-input" id="password" type={showPassword ? "text" : "password"} autoComplete='off' required noValidate=""
-                  onFocus={() => setTogglePasswordButton(true)} onBlur={handleBlur} value={password} onChange={e => setPassword(e.target.value)} />
+                  onFocus={() => setTogglePasswordButton(true)} onBlur={handleBlur} value={password} onChange={e => setPassword(e.target.value)}/>
                 <label className="form-label" htmlFor="password">Parola</label>
                 <button id="show-password" style={{ display: togglePasswordButton ? 'block' : 'none' }}
                   onClick={(handleShowPassword)} className="show-password">{showPassword ? "GİZLE" : "GÖSTER"}</button>
@@ -124,6 +176,10 @@ export default function SignIn() {
             <div className="infoContainer">
               <div className='rememberMe'>
                 <input id="rememberMe" type="checkbox" />Beni Hatırla
+                <button onClick={handleSubmit}></button>
+            <div>
+            
+         </div>
               </div>
               <a className="help" href="/">Yardım ister misiniz?</a>
             </div>
