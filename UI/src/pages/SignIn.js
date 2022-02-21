@@ -88,6 +88,7 @@ export default function SignIn() {
     signInWithPopup(auth, provider)
       .then((response) => {
         console.log("response", response);
+        window.location.href = "/home";
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -115,6 +116,7 @@ export default function SignIn() {
 
       try {
         await signInWithEmailAndPassword(auth, emailPhone, password);
+        window.location.href = "/home";
       } catch (err) {
         
         const errorCode = err.code;
