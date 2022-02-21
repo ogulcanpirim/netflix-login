@@ -19,15 +19,30 @@ body {
     top: 0;
     background-image: url('/public/images/netflix-background.jpeg');
   }
+
+  @media screen and (max-width: 740px) {
+    .App {
+      background-image: none;
+      background-color: #000;
+    }
+    .loginForm {
+      padding: 0 5%;
+    }
+  }
+
+  @media screen and (min-width: 740px) {
+    .loginForm {
+      padding: 60px 68px 40px 68px;
+      max-width: 314px;
+    }
+  }
   
   .loginForm {
-    max-width: 314px;
     min-height: 604px;
     height: max-content;
     background-color: #000000bb;
     align-self: center;
     flex-direction: column;
-    padding: 60px 68px 40px 68px;
     margin: auto;
   } 
   
