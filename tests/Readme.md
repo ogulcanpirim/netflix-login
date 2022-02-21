@@ -9,4 +9,4 @@
 - Build and run.
 
       npm install (only once)
-      node tests.js (whenver you want to run tests)
+      npm test (whenver you want to run tests)
