@@ -32,8 +32,8 @@ describe("TEST SUITE 4", () => {
         // TODO:
         await driver.wait(until.elementLocated(By.id('password')));
 
-        await driver.findElement(By.id("password")).clear();
-        await driver.findElement(By.id("password")).click();
+       // await driver.findElement(By.id("password")).clear();
+      //  await driver.findElement(By.id("password")).click();
         await driver.findElement(By.id("email_phone")).sendKeys("elham@gmail.com");
         await driver.findElement(By.id("password")).sendKeys("elham123");
         await driver.findElement(By.xpath("//button[contains(text(),'Oturum Aç')]")).click();
