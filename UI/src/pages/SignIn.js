@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect} from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import '../styles/SignIn.css';
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
@@ -26,6 +26,21 @@ export default function SignIn() {
   //loading
   const [loading, setLoading] = useState(false);
 
+  const rememberUser = useCallback((remember) => {
+    if (remember) {
+      try {
+        localStorage.setItem('Username', emailPhone);
+        localStorage.setItem('Password', password);
+      } catch (error) {
+      }
+    } else
+      try {
+        localStorage.removeItem('Username');
+        localStorage.removeItem('Password');
+      } catch (error) {
+      }
+  }, [emailPhone, password]);
+
   const handleShowPassword = (e) => {
     e.preventDefault();
     setShowPassword(!showPassword);
@@ -39,29 +54,13 @@ export default function SignIn() {
       setTogglePasswordButton(false);
     }
   }
- 
-  const rememberUser = (remember) => {
-    if (remember === true) {
-      try {
-         localStorage.setItem('Username', emailPhone);
-         localStorage.setItem('Password', password);
-      } catch (error) {
-      }
-      }if(remember === false)
-      try {
-       localStorage.removeItem('Username');
-       localStorage.removeItem('Password');
-      } catch (error) {
-      
-      }
 
-    
-  }
+
 
   const getRememberedUsername = () => {
     try {
       const username = localStorage.getItem('Username');
-      if (username !== null )
+      if (username !== null)
         return username;
       else
         return "";
@@ -69,12 +68,12 @@ export default function SignIn() {
       return "";
     }
   }
-  
+
 
   const getRememberedPassword = () => {
     try {
       const password = localStorage.getItem('Password');
-      if (password !== null )
+      if (password !== null)
         return password;
       else
         return "";
@@ -96,7 +95,7 @@ export default function SignIn() {
       })
   }
 
- 
+
 
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
@@ -106,7 +105,7 @@ export default function SignIn() {
     const passwordError = password.length < 4 || password.length > 60;
     const remember = e.target.rememberMe.checked;
     rememberUser(remember);
-   
+
 
     if (!emailError && !passwordError) {
       console.log("emailPhone: " + emailPhone);
@@ -118,19 +117,19 @@ export default function SignIn() {
         await signInWithEmailAndPassword(auth, emailPhone, password);
         window.location.href = "/home";
       } catch (err) {
-        
+
         const errorCode = err.code;
-        
+
         console.log("errorCode: " + errorCode);
-        if (errorCode.includes("wrong-password")){
+        if (errorCode.includes("wrong-password")) {
           setValidMessage("Parola yanlış. Lütfen yeniden deneyin ya da parolanızı sıfırlayın");
         }
 
-        else if (errorCode.includes("invalid-email") || errorCode.includes("user-not-found")){
+        else if (errorCode.includes("invalid-email") || errorCode.includes("user-not-found")) {
           setValidMessage("Bu e-posta adresi ile bağlantılı bir hesap bulamadık. Lütfen yeniden deneyin ya da yeni bir hesap oluşturun.");
         }
         setLoading(false);
-        
+
       }
     }
     else {
@@ -139,7 +138,7 @@ export default function SignIn() {
     }
 
     setLoading(false);
-  }, [emailPhone, password]);
+  }, [emailPhone, password, auth, rememberUser]);
 
   useEffect(() => {
     setEmailPhone(getRememberedUsername());
@@ -159,7 +158,7 @@ export default function SignIn() {
           <form autoComplete='off' onSubmit={handleSubmit}>
             <div className="inputGroup">
               <div className="inputContainer" style={{ borderBottom: errorEmail ? '3px solid #e87c03' : 'none' }}>
-                <input className="form-input" id="email_phone" type="text" autoComplete='off' required value={emailPhone} onChange={e => setEmailPhone(e.target.value)} noValidate=""/>
+                <input className="form-input" id="email_phone" type="text" autoComplete='off' required value={emailPhone} onChange={e => setEmailPhone(e.target.value)} noValidate="" />
                 <label className="form-label" htmlFor="email_phone">E-posta veya telefon numarası</label>
               </div>
               {errorEmail ? <div className="error">Lütfen geçerli bir telefon numarası veya e-posta adresi girin.</div> : undefined}
@@ -167,7 +166,7 @@ export default function SignIn() {
             <div className="inputGroup">
               <div className="inputContainer" id="passwordContainer" style={{ borderBottom: errorPassword ? '3px solid #e87c03' : 'none' }}>
                 <input className="form-input" id="password" type={showPassword ? "text" : "password"} autoComplete='off' required noValidate=""
-                  onFocus={() => setTogglePasswordButton(true)} onBlur={handleBlur} value={password} onChange={e => setPassword(e.target.value)}/>
+                  onFocus={() => setTogglePasswordButton(true)} onBlur={handleBlur} value={password} onChange={e => setPassword(e.target.value)} />
                 <label className="form-label" htmlFor="password">Parola</label>
                 <button id="show-password" style={{ display: togglePasswordButton ? 'block' : 'none' }}
                   onClick={(handleShowPassword)} className="show-password">{showPassword ? "GİZLE" : "GÖSTER"}</button>
@@ -179,17 +178,17 @@ export default function SignIn() {
               <div className='rememberMe'>
                 <input id="rememberMe" type="checkbox" />Beni Hatırla
                 <button onClick={handleSubmit}></button>
-            <div>
-            
-         </div>
+                <div>
+
+                </div>
               </div>
               <a className="help" href="/">Yardım ister misiniz?</a>
             </div>
           </form>
-          <a onClick={signInWithFacebook} className="fb-block">
+          <button onClick={signInWithFacebook} className="fb-block">
             <img className="fb-logo" src="https://assets.nflxext.com/ffe/siteui/login/images/FB-f-Logo__blue_57.png" alt="facebook-logo" />
             <div className='fb-text'>Facebook ile Oturum Aç</div>
-          </a>
+          </button>
           <div className='loginSignUpNow'>
             Netflix'e katılmak ister misiniz? <a className="signup-text" href="/">Şimdi kaydolun.</a>
           </div>

@@ -16,15 +16,16 @@ export const AuthContext = createContext()
 export const AuthContextProvider = props => {
     const [user, setUser] = useState();
     const [error, setError] = useState();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(getAuth(), setUser, setError)
+        const unsubscribe = onAuthStateChanged(getAuth(), (user) => { setUser(user); setLoading(false); }, setError,)
         return () => unsubscribe()
     }, [])
-    return <AuthContext.Provider value={{ user, error }} {...props} />
+    return <AuthContext.Provider value={{ user, error, loading }} {...props} />
 }
 
 export const useAuthState = () => {
     const auth = useContext(AuthContext)
-    return { ...auth, isAuthenticated: auth.user != null }
+    return { ...auth, isAuthenticated: auth.user != null, loading: auth.loading }
 }
