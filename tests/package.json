@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "chromedriver": "^98.0.0",
+    "geckodriver": "^3.0.1",
+    "msedgedriver": "^91.0.0",
     "rewire": "^6.0.0",
     "selenium-webdriver": "^4.1.1"
   },
