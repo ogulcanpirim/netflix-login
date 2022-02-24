@@ -1,0 +1,176 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-02-24T14:10:49.115Z",
+    "end": "2022-02-24T14:11:03.905Z",
+    "duration": 14790,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8a8d09a7-3712-4008-aba9-8fe414d5d046",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0ef292cb-d74e-490a-a5e5-8c3596d3f51b",
+          "title": "TEST SUITE 3",
+          "fullFile": "C:\\Users\\moelh\\Desktop\\CS 458\\netflix-login\\tests\\test_case_3.js",
+          "file": "\\test_case_3.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"TEST SUITE 3\"",
+              "fullTitle": "TEST SUITE 3 \"before each\" hook in \"TEST SUITE 3\"",
+              "timedOut": false,
+              "duration": 671,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driver = await new Builder().forBrowser(\"chrome\").build();",
+              "err": {},
+              "uuid": "87840d19-847f-4db6-bb08-38ccbb9c8e76",
+              "parentUUID": "0ef292cb-d74e-490a-a5e5-8c3596d3f51b",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"TEST SUITE 3\"",
+              "fullTitle": "TEST SUITE 3 \"after each\" hook in \"TEST SUITE 3\"",
+              "timedOut": false,
+              "duration": 76,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.quit();",
+              "err": {},
+              "uuid": "40dff8ce-a130-40f5-8eb1-34f74caf3fa7",
+              "parentUUID": "0ef292cb-d74e-490a-a5e5-8c3596d3f51b",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Verifies the login page by pressing 'Back button' of the browser. It should not allow the user to enter into the system once they log out.",
+              "fullTitle": "TEST SUITE 3 Verifies the login page by pressing 'Back button' of the browser. It should not allow the user to enter into the system once they log out.",
+              "timedOut": false,
+              "duration": 2403,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await login(driver);\nawait logout(driver);\nawait driver.navigate().back();\nconst title = await driver.getTitle();\nexpect(title).to.equal(\"Netflix Login\");",
+              "err": {},
+              "uuid": "e1598556-4774-489f-b0c7-5478af852ed6",
+              "parentUUID": "0ef292cb-d74e-490a-a5e5-8c3596d3f51b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Verifies if a user should not be allowed to log in with different credentials from the same browser at the same time.",
+              "fullTitle": "TEST SUITE 3 Verifies if a user should not be allowed to log in with different credentials from the same browser at the same time.",
+              "timedOut": false,
+              "duration": 3714,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await login(driver);\n// Try openning login page again\nawait driver.switchTo().newWindow(\"tab\");\nawait driver.get(BASE_URL);\n// There is a small delay before showing the homepage\nawait new Promise((resolve) => setTimeout(() => resolve(true), 1000));\nconst title = await driver.getTitle();\nexpect(title).to.equal(\"Netflix Home\");",
+              "err": {},
+              "uuid": "e43cb9f2-24f9-40d7-b198-95c32f599fba",
+              "parentUUID": "0ef292cb-d74e-490a-a5e5-8c3596d3f51b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Verifies if a user should be able to login with the same credentials in different browsers at the same time.",
+              "fullTitle": "TEST SUITE 3 Verifies if a user should be able to login with the same credentials in different browsers at the same time.",
+              "timedOut": false,
+              "duration": 6512,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login with chrome\nawait login(driver);\n// Login with firefox\nconst firefoxDriver = await new Builder().forBrowser(\"firefox\").build();\nawait login(firefoxDriver);\n// Check titles\nconst chromeTitle = await driver.getTitle();\nconst firefoxTitle = await firefoxDriver.getTitle();\nexpect(chromeTitle).to.equal(firefoxTitle).to.equal(\"Netflix Home\");\nfirefoxDriver.quit();",
+              "err": {},
+              "uuid": "806c959b-9dae-4785-a3ea-519c747c2810",
+              "parentUUID": "0ef292cb-d74e-490a-a5e5-8c3596d3f51b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e1598556-4774-489f-b0c7-5478af852ed6",
+            "e43cb9f2-24f9-40d7-b198-95c32f599fba",
+            "806c959b-9dae-4785-a3ea-519c747c2810"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 12629,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 10000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "9.2.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.1"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.0.1"
+    }
+  }
+}
