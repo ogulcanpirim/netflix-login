@@ -1,4 +1,4 @@
-import { FacebookAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signInAnonymously } from "firebase/auth";
 import React, { useCallback, useEffect, useState } from "react";
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
@@ -30,12 +30,12 @@ export default function SignIn() {
         try {
           localStorage.setItem("Username", emailPhone);
           localStorage.setItem("Password", password);
-        } catch (error) {}
+        } catch (error) { }
       } else
         try {
           localStorage.removeItem("Username");
           localStorage.removeItem("Password");
-        } catch (error) {}
+        } catch (error) { }
     },
     [emailPhone, password]
   );
@@ -74,17 +74,15 @@ export default function SignIn() {
     }
   };
 
-  const signInWithFacebook = () => {
-    const provider = new FacebookAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((response) => {
-        console.log("response", response);
+  const signInAnonymous = async() => {
+
+    //sign in anonymously without credentials
+    try {
+        await signInAnonymously(auth);
         window.location.href = "/home";
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        console.log("errorCode", errorCode);
-      });
+    } catch (error) {
+        console.log(error);
+    }
   };
 
   const handleSubmit = useCallback(
@@ -204,7 +202,7 @@ export default function SignIn() {
               </a>
             </div>
           </form>
-          <button onClick={signInWithFacebook} className="fb-block">
+          <button onClick={signInAnonymous} className="fb-block">
             <img className="fb-logo" src="https://assets.nflxext.com/ffe/siteui/login/images/FB-f-Logo__blue_57.png" alt="facebook-logo" />
             <div className="fb-text">Facebook ile Oturum Aç</div>
           </button>

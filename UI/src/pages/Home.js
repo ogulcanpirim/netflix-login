@@ -21,7 +21,7 @@ export default function Home(props) {
         <img src="./images/logo.svg" height="45" width="167" alt="netflix-logo" />
       </div>
       <div className="container">
-        <h2 style={{ color: "#fff" }}>Welcome, {user?.email}</h2>
+        <h2 style={{ color: "#fff" }}>Welcome, {user?.email || "logged with facebook !"}</h2>
         <button id="logout" className="logOut" onClick={logOut}>
           Sign Out
         </button>
