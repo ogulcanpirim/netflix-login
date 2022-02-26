@@ -22,7 +22,7 @@ export default function Home(props) {
       </div>
       <div className="container">
         <h2 style={{ color: "#fff" }}>Welcome, {user?.email || "logged with facebook !"}</h2>
-        <button id="logout" className="logOut" onClick={logOut}>
+        <button id="logout_button" className="logOut" onClick={logOut}>
           Sign Out
         </button>
       </div>
