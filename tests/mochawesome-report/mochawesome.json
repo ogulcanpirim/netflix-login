@@ -1,14 +1,14 @@
 {
   "stats": {
-    "suites": 4,
-    "tests": 6,
-    "passes": 6,
+    "suites": 5,
+    "tests": 7,
+    "passes": 7,
     "pending": 0,
     "failures": 0,
-    "start": "2022-02-26T12:59:15.250Z",
-    "end": "2022-02-26T12:59:38.875Z",
-    "duration": 23625,
-    "testsRegistered": 6,
+    "start": "2022-02-26T13:20:47.969Z",
+    "end": "2022-02-26T13:21:16.010Z",
+    "duration": 28041,
+    "testsRegistered": 7,
     "passPercent": 100,
     "pendingPercent": 0,
     "other": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "5e0074c5-6429-4ab4-99a6-594109ed2cdc",
+      "uuid": "15b5769d-73e9-457d-9774-07a825059c00",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "8678fba9-80cd-46d9-8659-05ff76057e21",
+          "uuid": "d776df63-f897-4287-ab41-d99cdd9b95a5",
           "title": "TEST SUITE 1 (Credential Tests)",
           "fullFile": "C:\\Users\\moelh\\Desktop\\CS 458\\netflix-login\\tests\\test_case_1.js",
           "file": "\\test_case_1.js",
@@ -36,7 +36,7 @@
               "title": "\"before each\" hook in \"TEST SUITE 1 (Credential Tests)\"",
               "fullTitle": "TEST SUITE 1 (Credential Tests) \"before each\" hook in \"TEST SUITE 1 (Credential Tests)\"",
               "timedOut": false,
-              "duration": 691,
+              "duration": 769,
               "state": null,
               "speed": null,
               "pass": false,
@@ -45,8 +45,8 @@
               "context": null,
               "code": "driver = await buildDriver();",
               "err": {},
-              "uuid": "9c741197-b502-4a42-bfbe-eba9ed5da477",
-              "parentUUID": "8678fba9-80cd-46d9-8659-05ff76057e21",
+              "uuid": "0f42c2e3-7670-4e6b-944a-be1883833fc7",
+              "parentUUID": "d776df63-f897-4287-ab41-d99cdd9b95a5",
               "isHook": true,
               "skipped": false
             }
@@ -56,7 +56,7 @@
               "title": "\"after each\" hook in \"TEST SUITE 1 (Credential Tests)\"",
               "fullTitle": "TEST SUITE 1 (Credential Tests) \"after each\" hook in \"TEST SUITE 1 (Credential Tests)\"",
               "timedOut": false,
-              "duration": 59,
+              "duration": 68,
               "state": null,
               "speed": null,
               "pass": false,
@@ -65,8 +65,8 @@
               "context": null,
               "code": "await driver.quit();",
               "err": {},
-              "uuid": "2d854ad2-48d2-4a76-b0cd-a7ab3c256845",
-              "parentUUID": "8678fba9-80cd-46d9-8659-05ff76057e21",
+              "uuid": "80e3e4c5-00a5-404e-af93-678e14f3bd51",
+              "parentUUID": "d776df63-f897-4287-ab41-d99cdd9b95a5",
               "isHook": true,
               "skipped": false
             }
@@ -76,7 +76,7 @@
               "title": "Verifies if the user can login with registered email and password.",
               "fullTitle": "TEST SUITE 1 (Credential Tests) Verifies if the user can login with registered email and password.",
               "timedOut": false,
-              "duration": 2718,
+              "duration": 2608,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -85,8 +85,8 @@
               "context": null,
               "code": "await driver.get(BASE_URL);\nawait driver.wait(until.elementLocated(By.id(\"email-phone\")));\nawait driver.findElement(By.id(\"email-phone\")).sendKeys(\"elham@gmail.com\");\nawait driver.findElement(By.id(\"password\")).sendKeys(\"elham123\");\nawait driver.findElement(By.id(\"login-button\")).click();\nawait driver.wait(until.elementLocated(By.id(\"logout_button\")));\nconst title = await driver.getTitle();\nexpect(title).to.equal(\"Netflix Home\");",
               "err": {},
-              "uuid": "64de0365-e5e4-41b9-8880-323fd3993b47",
-              "parentUUID": "8678fba9-80cd-46d9-8659-05ff76057e21",
+              "uuid": "9be13036-f4d6-42a1-8e81-c7c1dadb7a1f",
+              "parentUUID": "d776df63-f897-4287-ab41-d99cdd9b95a5",
               "isHook": false,
               "skipped": false
             },
@@ -94,7 +94,7 @@
               "title": "Verifies if user cannot login with unregistered email and password.",
               "fullTitle": "TEST SUITE 1 (Credential Tests) Verifies if user cannot login with unregistered email and password.",
               "timedOut": false,
-              "duration": 1947,
+              "duration": 2118,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -103,27 +103,27 @@
               "context": null,
               "code": "await driver.get(BASE_URL);\nawait driver.wait(until.elementLocated(By.id(\"email-phone\")));\nawait driver.findElement(By.id(\"email-phone\")).sendKeys(\"elham@hotmail.com\");\nawait driver.findElement(By.id(\"password\")).sendKeys(\"password123\");\nawait driver.findElement(By.id(\"login-button\")).click();\nawait driver.wait(until.elementLocated(By.id(\"message-container\")));\nlet errorMessage = await driver.findElement(By.id(\"message-container\")).getText();\nexpect(errorMessage).to.equal(\n  \"Bu e-posta adresi ile bağlantılı bir hesap bulamadık. Lütfen yeniden deneyin ya da yeni bir hesap oluşturun.\"\n);",
               "err": {},
-              "uuid": "ba2523c4-507f-4afd-88dc-45ed178dbb2c",
-              "parentUUID": "8678fba9-80cd-46d9-8659-05ff76057e21",
+              "uuid": "3132626e-c711-4dda-8795-6c3172e4effd",
+              "parentUUID": "d776df63-f897-4287-ab41-d99cdd9b95a5",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "64de0365-e5e4-41b9-8880-323fd3993b47",
-            "ba2523c4-507f-4afd-88dc-45ed178dbb2c"
+            "9be13036-f4d6-42a1-8e81-c7c1dadb7a1f",
+            "3132626e-c711-4dda-8795-6c3172e4effd"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 4665,
+          "duration": 4726,
           "root": false,
           "rootEmpty": false,
           "_timeout": 10000
         },
         {
-          "uuid": "8765e678-da2d-4185-8593-0c8259082133",
+          "uuid": "fd42b533-977b-4251-bdfa-d94a3d34bebe",
           "title": "TEST SUITE 2 (Remember Me Test)",
           "fullFile": "C:\\Users\\moelh\\Desktop\\CS 458\\netflix-login\\tests\\test_case_2.js",
           "file": "\\test_case_2.js",
@@ -132,7 +132,7 @@
               "title": "\"before each\" hook in \"TEST SUITE 2 (Remember Me Test)\"",
               "fullTitle": "TEST SUITE 2 (Remember Me Test) \"before each\" hook in \"TEST SUITE 2 (Remember Me Test)\"",
               "timedOut": false,
-              "duration": 816,
+              "duration": 843,
               "state": null,
               "speed": null,
               "pass": false,
@@ -141,8 +141,8 @@
               "context": null,
               "code": "driver = await buildDriver();",
               "err": {},
-              "uuid": "7a8fdc94-879c-4e12-9c63-2b06671b99fe",
-              "parentUUID": "8765e678-da2d-4185-8593-0c8259082133",
+              "uuid": "08045b72-ced8-44d3-a7c3-02eb2afab65f",
+              "parentUUID": "fd42b533-977b-4251-bdfa-d94a3d34bebe",
               "isHook": true,
               "skipped": false
             }
@@ -152,7 +152,7 @@
               "title": "\"after each\" hook in \"TEST SUITE 2 (Remember Me Test)\"",
               "fullTitle": "TEST SUITE 2 (Remember Me Test) \"after each\" hook in \"TEST SUITE 2 (Remember Me Test)\"",
               "timedOut": false,
-              "duration": 188,
+              "duration": 151,
               "state": null,
               "speed": null,
               "pass": false,
@@ -161,8 +161,8 @@
               "context": null,
               "code": "await driver.quit();",
               "err": {},
-              "uuid": "0120f2cb-ed81-4025-99c3-0152f020f152",
-              "parentUUID": "8765e678-da2d-4185-8593-0c8259082133",
+              "uuid": "78445233-9030-47cd-bf62-487dfd776703",
+              "parentUUID": "fd42b533-977b-4251-bdfa-d94a3d34bebe",
               "isHook": true,
               "skipped": false
             }
@@ -172,7 +172,7 @@
               "title": "Verifies if the 'Remember Me' functionality keeps the user credentials after logout.",
               "fullTitle": "TEST SUITE 2 (Remember Me Test) Verifies if the 'Remember Me' functionality keeps the user credentials after logout.",
               "timedOut": false,
-              "duration": 2892,
+              "duration": 3302,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -181,35 +181,35 @@
               "context": null,
               "code": "// Login with remember me enabled\nawait loginWithRememberMe(driver);\nawait driver.wait(until.elementLocated(By.id(\"logout_button\")));\n// Get local storage object\nconst localStorage = await driver.executeScript(`return localStorage`);\n// Logout and check remembered values\nawait logout(driver);\nawait driver.get(BASE_URL);\nawait driver.wait(until.elementLocated(By.id(\"email-phone\")));\nconst usernameValue = await driver.findElement(By.id(\"email-phone\")).getAttribute(\"value\");\nconst passwordValue = await driver.findElement(By.id(\"password\")).getAttribute(\"value\");\nexpect(usernameValue).to.equal(localStorage[\"Username\"]) && expect(passwordValue).to.equal(localStorage[\"Password\"]);",
               "err": {},
-              "uuid": "47c6ed24-6ea6-4586-a926-cc45c3d1d7d1",
-              "parentUUID": "8765e678-da2d-4185-8593-0c8259082133",
+              "uuid": "ad5814fb-d080-4224-89f5-51cf815b7774",
+              "parentUUID": "fd42b533-977b-4251-bdfa-d94a3d34bebe",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "47c6ed24-6ea6-4586-a926-cc45c3d1d7d1"
+            "ad5814fb-d080-4224-89f5-51cf815b7774"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 2892,
+          "duration": 3302,
           "root": false,
           "rootEmpty": false,
           "_timeout": 10000
         },
         {
-          "uuid": "38f69365-808c-4a66-aee7-c63f060d6fda",
-          "title": "TEST SUITE 4 (Different Browsers Test)",
-          "fullFile": "C:\\Users\\moelh\\Desktop\\CS 458\\netflix-login\\tests\\test_case_4.js",
-          "file": "\\test_case_4.js",
+          "uuid": "4bab4bca-d721-4945-b3b8-dd6dc07b12db",
+          "title": "TEST SUITE 3 (Login with Facebook Test)",
+          "fullFile": "C:\\Users\\moelh\\Desktop\\CS 458\\netflix-login\\tests\\test_case_3.js",
+          "file": "\\test_case_3.js",
           "beforeHooks": [
             {
-              "title": "\"before each\" hook in \"TEST SUITE 4 (Different Browsers Test)\"",
-              "fullTitle": "TEST SUITE 4 (Different Browsers Test) \"before each\" hook in \"TEST SUITE 4 (Different Browsers Test)\"",
+              "title": "\"before each\" hook in \"TEST SUITE 3 (Login with Facebook Test)\"",
+              "fullTitle": "TEST SUITE 3 (Login with Facebook Test) \"before each\" hook in \"TEST SUITE 3 (Login with Facebook Test)\"",
               "timedOut": false,
-              "duration": 762,
+              "duration": 809,
               "state": null,
               "speed": null,
               "pass": false,
@@ -218,18 +218,18 @@
               "context": null,
               "code": "driver = await buildDriver();",
               "err": {},
-              "uuid": "cb9ecf5a-209b-4cde-878e-b3f486b4dc65",
-              "parentUUID": "38f69365-808c-4a66-aee7-c63f060d6fda",
+              "uuid": "f57dfcca-8164-4586-9e1e-df77e5e5d024",
+              "parentUUID": "4bab4bca-d721-4945-b3b8-dd6dc07b12db",
               "isHook": true,
               "skipped": false
             }
           ],
           "afterHooks": [
             {
-              "title": "\"after each\" hook in \"TEST SUITE 4 (Different Browsers Test)\"",
-              "fullTitle": "TEST SUITE 4 (Different Browsers Test) \"after each\" hook in \"TEST SUITE 4 (Different Browsers Test)\"",
+              "title": "\"after each\" hook in \"TEST SUITE 3 (Login with Facebook Test)\"",
+              "fullTitle": "TEST SUITE 3 (Login with Facebook Test) \"after each\" hook in \"TEST SUITE 3 (Login with Facebook Test)\"",
               "timedOut": false,
-              "duration": 178,
+              "duration": 91,
               "state": null,
               "speed": null,
               "pass": false,
@@ -238,55 +238,55 @@
               "context": null,
               "code": "await driver.quit();",
               "err": {},
-              "uuid": "9eae5a1d-b002-40fd-8aae-435b0b99bff2",
-              "parentUUID": "38f69365-808c-4a66-aee7-c63f060d6fda",
+              "uuid": "5917a83b-47f1-4822-918a-4cebf5a2d407",
+              "parentUUID": "4bab4bca-d721-4945-b3b8-dd6dc07b12db",
               "isHook": true,
               "skipped": false
             }
           ],
           "tests": [
             {
-              "title": "Verifies if a user should be able to login with the same credentials in different browsers at the same time.",
-              "fullTitle": "TEST SUITE 4 (Different Browsers Test) Verifies if a user should be able to login with the same credentials in different browsers at the same time.",
+              "title": "Verifies if the user can login with Facebook and is redirected to home page.",
+              "fullTitle": "TEST SUITE 3 (Login with Facebook Test) Verifies if the user can login with Facebook and is redirected to home page.",
               "timedOut": false,
-              "duration": 9600,
+              "duration": 2703,
               "state": "passed",
               "speed": "slow",
               "pass": true,
               "fail": false,
               "pending": false,
               "context": null,
-              "code": "// Login with chrome\nawait login(driver);\n// Login with firefox\nconst firefoxDriver = await new Builder().forBrowser(\"firefox\").build();\nawait login(firefoxDriver);\n// Check titles\nconst chromeTitle = await driver.getTitle();\nconst firefoxTitle = await firefoxDriver.getTitle();\nexpect(chromeTitle).to.equal(firefoxTitle).to.equal(\"Netflix Home\");\nfirefoxDriver.quit();",
+              "code": "await driver.get(BASE_URL);\nawait driver.wait(until.elementLocated(By.id(\"login-fb-button\")));\nawait driver.findElement(By.id(\"login-fb-button\")).click();\nawait driver.wait(until.elementLocated(By.id(\"logout_button\")));\nconst title = await driver.getTitle();\nconst welcomeMessage = await driver.findElement(By.id(\"welcome-message\")).getText();\nexpect(title).to.equal('Netflix Home') && expect(welcomeMessage).to.equal(\"Welcome, logged with facebook !\")",
               "err": {},
-              "uuid": "186c75ad-615b-4771-8973-79327ef84a24",
-              "parentUUID": "38f69365-808c-4a66-aee7-c63f060d6fda",
+              "uuid": "5327d8a4-884e-4933-a8e6-434ad1621735",
+              "parentUUID": "4bab4bca-d721-4945-b3b8-dd6dc07b12db",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "186c75ad-615b-4771-8973-79327ef84a24"
+            "5327d8a4-884e-4933-a8e6-434ad1621735"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 9600,
+          "duration": 2703,
           "root": false,
           "rootEmpty": false,
           "_timeout": 10000
         },
         {
-          "uuid": "42c62cf4-64b4-4492-9b7e-1811d3bbe280",
-          "title": "TEST SUITE 5 (Error Messages Tests)",
-          "fullFile": "C:\\Users\\moelh\\Desktop\\CS 458\\netflix-login\\tests\\test_case_5.js",
-          "file": "\\test_case_5.js",
+          "uuid": "f03fbc98-7e8f-44b3-88f4-f00fbdd797a8",
+          "title": "TEST SUITE 4 (Error Messages Tests)",
+          "fullFile": "C:\\Users\\moelh\\Desktop\\CS 458\\netflix-login\\tests\\test_case_4.js",
+          "file": "\\test_case_4.js",
           "beforeHooks": [
             {
-              "title": "\"before all\" hook in \"TEST SUITE 5 (Error Messages Tests)\"",
-              "fullTitle": "TEST SUITE 5 (Error Messages Tests) \"before all\" hook in \"TEST SUITE 5 (Error Messages Tests)\"",
+              "title": "\"before all\" hook in \"TEST SUITE 4 (Error Messages Tests)\"",
+              "fullTitle": "TEST SUITE 4 (Error Messages Tests) \"before all\" hook in \"TEST SUITE 4 (Error Messages Tests)\"",
               "timedOut": false,
-              "duration": 962,
+              "duration": 810,
               "state": null,
               "speed": null,
               "pass": false,
@@ -295,16 +295,16 @@
               "context": null,
               "code": "driver = await new Builder().forBrowser(\"chrome\").build();",
               "err": {},
-              "uuid": "973b1125-beeb-436e-a7ea-f07c4e5a37a9",
-              "parentUUID": "42c62cf4-64b4-4492-9b7e-1811d3bbe280",
+              "uuid": "108f16c5-26f2-493f-8994-e3735c31f3ab",
+              "parentUUID": "f03fbc98-7e8f-44b3-88f4-f00fbdd797a8",
               "isHook": true,
               "skipped": false
             },
             {
-              "title": "\"before each\" hook in \"TEST SUITE 5 (Error Messages Tests)\"",
-              "fullTitle": "TEST SUITE 5 (Error Messages Tests) \"before each\" hook in \"TEST SUITE 5 (Error Messages Tests)\"",
+              "title": "\"before each\" hook in \"TEST SUITE 4 (Error Messages Tests)\"",
+              "fullTitle": "TEST SUITE 4 (Error Messages Tests) \"before each\" hook in \"TEST SUITE 4 (Error Messages Tests)\"",
               "timedOut": false,
-              "duration": 85,
+              "duration": 86,
               "state": null,
               "speed": null,
               "pass": false,
@@ -313,16 +313,16 @@
               "context": null,
               "code": "await driver.get(BASE_URL);",
               "err": {},
-              "uuid": "0dad3167-c60a-47a6-8558-79650d4953e3",
-              "parentUUID": "42c62cf4-64b4-4492-9b7e-1811d3bbe280",
+              "uuid": "e9c96218-cfc1-44a8-987b-d393eb943848",
+              "parentUUID": "f03fbc98-7e8f-44b3-88f4-f00fbdd797a8",
               "isHook": true,
               "skipped": false
             }
           ],
           "afterHooks": [
             {
-              "title": "\"after all\" hook in \"TEST SUITE 5 (Error Messages Tests)\"",
-              "fullTitle": "TEST SUITE 5 (Error Messages Tests) \"after all\" hook in \"TEST SUITE 5 (Error Messages Tests)\"",
+              "title": "\"after all\" hook in \"TEST SUITE 4 (Error Messages Tests)\"",
+              "fullTitle": "TEST SUITE 4 (Error Messages Tests) \"after all\" hook in \"TEST SUITE 4 (Error Messages Tests)\"",
               "timedOut": false,
               "duration": 0,
               "state": null,
@@ -333,8 +333,8 @@
               "context": null,
               "code": "driver.quit();",
               "err": {},
-              "uuid": "5900443b-22bd-44ae-b088-b01336f15bac",
-              "parentUUID": "42c62cf4-64b4-4492-9b7e-1811d3bbe280",
+              "uuid": "719438f4-705c-4302-b0c7-3f35ff14c4d4",
+              "parentUUID": "f03fbc98-7e8f-44b3-88f4-f00fbdd797a8",
               "isHook": true,
               "skipped": false
             }
@@ -342,9 +342,9 @@
           "tests": [
             {
               "title": "Check if invalid email form is entered.",
-              "fullTitle": "TEST SUITE 5 (Error Messages Tests) Check if invalid email form is entered.",
+              "fullTitle": "TEST SUITE 4 (Error Messages Tests) Check if invalid email form is entered.",
               "timedOut": false,
-              "duration": 593,
+              "duration": 773,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -353,16 +353,16 @@
               "context": null,
               "code": "await driver.wait(until.elementLocated(By.id(\"email-phone\")));\nawait driver.findElement(By.id(\"email-phone\")).sendKeys(\"in\");\nawait driver.findElement(By.id(\"password\")).sendKeys(\"pass\");\nawait driver.findElement(By.id(\"login-button\")).click();\nawait driver.wait(until.elementLocated(By.id(\"email-error-message\")));\nlet errorMessage = await driver.findElement(By.id(\"email-error-message\")).getText();\nexpect(errorMessage).to.equal(\"Lütfen geçerli bir telefon numarası veya e-posta adresi girin.\");",
               "err": {},
-              "uuid": "bf84b8df-425d-4cbc-80b6-2dd6ffe65f8c",
-              "parentUUID": "42c62cf4-64b4-4492-9b7e-1811d3bbe280",
+              "uuid": "7a9186a8-c2aa-4fb0-b523-f7c2c60c4db5",
+              "parentUUID": "f03fbc98-7e8f-44b3-88f4-f00fbdd797a8",
               "isHook": false,
               "skipped": false
             },
             {
               "title": "Check if a too short password is entered",
-              "fullTitle": "TEST SUITE 5 (Error Messages Tests) Check if a too short password is entered",
+              "fullTitle": "TEST SUITE 4 (Error Messages Tests) Check if a too short password is entered",
               "timedOut": false,
-              "duration": 376,
+              "duration": 410,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -371,21 +371,98 @@
               "context": null,
               "code": "await driver.wait(until.elementLocated(By.id(\"password\")));\nawait driver.findElement(By.id(\"password\")).sendKeys(\"pas\");\nawait driver.findElement(By.id(\"login-button\")).click();\nlet errorMessage = await driver.findElement(By.id(\"wrongPassMsgContainer\")).getText();\nexpect(errorMessage).to.equal(\"Parola 4 ile 60 karakter olmalıdır.\");",
               "err": {},
-              "uuid": "a872ba7d-f7ee-4278-a1f3-ce06b613414a",
-              "parentUUID": "42c62cf4-64b4-4492-9b7e-1811d3bbe280",
+              "uuid": "789becce-8050-4462-94df-74d64c4fa55e",
+              "parentUUID": "f03fbc98-7e8f-44b3-88f4-f00fbdd797a8",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "bf84b8df-425d-4cbc-80b6-2dd6ffe65f8c",
-            "a872ba7d-f7ee-4278-a1f3-ce06b613414a"
+            "7a9186a8-c2aa-4fb0-b523-f7c2c60c4db5",
+            "789becce-8050-4462-94df-74d64c4fa55e"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 969,
+          "duration": 1183,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        },
+        {
+          "uuid": "e7cd2ad9-f502-4cc9-b5d6-dbb26cc040f9",
+          "title": "TEST SUITE 5 (Different Browsers Test)",
+          "fullFile": "C:\\Users\\moelh\\Desktop\\CS 458\\netflix-login\\tests\\test_case_5.js",
+          "file": "\\test_case_5.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"TEST SUITE 5 (Different Browsers Test)\"",
+              "fullTitle": "TEST SUITE 5 (Different Browsers Test) \"before each\" hook in \"TEST SUITE 5 (Different Browsers Test)\"",
+              "timedOut": false,
+              "duration": 766,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driver = await buildDriver();",
+              "err": {},
+              "uuid": "accc4c86-3277-487c-99ff-0714d4aa5f22",
+              "parentUUID": "e7cd2ad9-f502-4cc9-b5d6-dbb26cc040f9",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"TEST SUITE 5 (Different Browsers Test)\"",
+              "fullTitle": "TEST SUITE 5 (Different Browsers Test) \"after each\" hook in \"TEST SUITE 5 (Different Browsers Test)\"",
+              "timedOut": false,
+              "duration": 97,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.quit();",
+              "err": {},
+              "uuid": "709bd0b0-7303-476d-bb43-97b63e525aa0",
+              "parentUUID": "e7cd2ad9-f502-4cc9-b5d6-dbb26cc040f9",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Verifies if a user should be able to login with the same credentials in different browsers at the same time.",
+              "fullTitle": "TEST SUITE 5 (Different Browsers Test) Verifies if a user should be able to login with the same credentials in different browsers at the same time.",
+              "timedOut": false,
+              "duration": 9804,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login with chrome\nawait login(driver);\n// Login with firefox\nconst firefoxDriver = await new Builder().forBrowser(\"firefox\").build();\nawait login(firefoxDriver);\n// Check titles\nconst chromeTitle = await driver.getTitle();\nconst firefoxTitle = await firefoxDriver.getTitle();\nexpect(chromeTitle).to.equal(firefoxTitle).to.equal(\"Netflix Home\");\nfirefoxDriver.quit();",
+              "err": {},
+              "uuid": "0045c044-3f28-4389-a90b-a754729a0e3f",
+              "parentUUID": "e7cd2ad9-f502-4cc9-b5d6-dbb26cc040f9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0045c044-3f28-4389-a90b-a754729a0e3f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9804,
           "root": false,
           "rootEmpty": false,
           "_timeout": 10000

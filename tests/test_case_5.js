@@ -1,38 +1,44 @@
+
 const { expect } = require("chai");
 require("chromedriver");
 const { Builder, By, until } = require("selenium-webdriver");
 
-const BASE_URL = "http://localhost:3000/signin";
+const BASE_URL = "http://localhost:3000";
 
-describe("TEST SUITE 5 (Error Messages Tests)", () => {
+describe("TEST SUITE 5 (Different Browsers Test)", () => {
   let driver;
-  before(async () => {
-    driver = await new Builder().forBrowser("chrome").build();
-  });
-
-  after(() => {
-    driver.quit();
-  });
 
   beforeEach(async () => {
-    await driver.get(BASE_URL);
+    driver = await buildDriver();
   });
 
-  it("Check if invalid email form is entered.", async () => {
-    await driver.wait(until.elementLocated(By.id("email-phone")));
-    await driver.findElement(By.id("email-phone")).sendKeys("in");
-    await driver.findElement(By.id("password")).sendKeys("pass");
-    await driver.findElement(By.id("login-button")).click();
-    await driver.wait(until.elementLocated(By.id("email-error-message")));
-    let errorMessage = await driver.findElement(By.id("email-error-message")).getText();
-    expect(errorMessage).to.equal("Lütfen geçerli bir telefon numarası veya e-posta adresi girin.");
+  afterEach(async () => {
+    await driver.quit();
   });
 
-  it("Check if a too short password is entered", async () => {
-    await driver.wait(until.elementLocated(By.id("password")));
-    await driver.findElement(By.id("password")).sendKeys("pas");
-    await driver.findElement(By.id("login-button")).click();
-    let errorMessage = await driver.findElement(By.id("wrongPassMsgContainer")).getText();
-    expect(errorMessage).to.equal("Parola 4 ile 60 karakter olmalıdır.");
+  it("Verifies if a user should be able to login with the same credentials in different browsers at the same time.", async () => {
+    // Login with chrome
+    await login(driver);
+    // Login with firefox
+    const firefoxDriver = await new Builder().forBrowser("firefox").build();
+    await login(firefoxDriver);
+    // Check titles
+    const chromeTitle = await driver.getTitle();
+    const firefoxTitle = await firefoxDriver.getTitle();
+    expect(chromeTitle).to.equal(firefoxTitle).to.equal("Netflix Home");
+    firefoxDriver.quit();
   });
 });
+
+// ========================= UTIL Funcs =====================
+const buildDriver = async () => (driver = await new Builder().forBrowser("chrome").build());
+
+const login = async (driver) => {
+  await driver.get(BASE_URL);
+  await driver.wait(until.elementLocated(By.id("email-phone")));
+  await driver.findElement(By.id("email-phone")).sendKeys("elham@gmail.com");
+  await driver.findElement(By.id("password")).sendKeys("elham123");
+  await driver.findElement(By.id("login-button")).click();
+  // Wait to fully log in
+  await driver.wait(until.elementLocated(By.id("logout_button")));
+};

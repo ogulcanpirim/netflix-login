@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword, signInAnonymously } from "firebase/auth";
+import { getAuth, signInAnonymously, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useCallback, useEffect, useState } from "react";
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
@@ -191,7 +191,7 @@ export default function SignIn() {
               </a>
             </div>
           </form>
-          <button onClick={signInAnonymous} className="fb-block">
+          <button onClick={signInAnonymous} className="fb-block" id="login-fb-button">
             <img className="fb-logo" src="https://assets.nflxext.com/ffe/siteui/login/images/FB-f-Logo__blue_57.png" alt="facebook-logo" />
             <div className="fb-text">Facebook ile Oturum Aç</div>
           </button>

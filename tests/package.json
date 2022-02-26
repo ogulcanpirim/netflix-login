@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "mocha -r esm ./*.js -t 10000 --reporter mochawesome"
+    "test": "mocha -r esm ./*.js -t 10000 --reporter mochawesome",
+    "test3": "mocha -r esm ./test_case_4.js -t 10000"
   },
   "keywords": [],
   "author": "",
