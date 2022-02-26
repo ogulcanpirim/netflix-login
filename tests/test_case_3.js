@@ -64,6 +64,7 @@ describe("TEST SUITE 3", () => {
   });
 });
 
+// ========================= UTIL Funcs =====================
 const buildDriver = async () => (driver = await new Builder().forBrowser("chrome").build());
 
 const login = async (driver) => {
