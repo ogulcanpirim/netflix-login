@@ -154,14 +154,14 @@ export default function SignIn() {
 
         <div className="loginForm">
           <h1>Oturum Aç</h1>
-          {validMessage && <div className='messageContainer'>{validMessage}</div>}
+          {validMessage && <div id="message-container" className='messageContainer'>{validMessage}</div>}
           <form autoComplete='off' onSubmit={handleSubmit}>
             <div className="inputGroup">
               <div className="inputContainer" style={{ borderBottom: errorEmail ? '3px solid #e87c03' : 'none' }}>
-                <input className="form-input" id="email_phone" type="text" autoComplete='off' required value={emailPhone} onChange={e => setEmailPhone(e.target.value)} noValidate="" />
-                <label className="form-label" htmlFor="email_phone">E-posta veya telefon numarası</label>
+                <input className="form-input" id="email-phone" type="text" autoComplete='off' required value={emailPhone} onChange={e => setEmailPhone(e.target.value)} noValidate="" />
+                <label className="form-label" htmlFor="email-phone">E-posta veya telefon numarası</label>
               </div>
-              {errorEmail ? <div className="error">Lütfen geçerli bir telefon numarası veya e-posta adresi girin.</div> : undefined}
+              {errorEmail ? <div id="email-error-message" className="error">Lütfen geçerli bir telefon numarası veya e-posta adresi girin.</div> : undefined}
             </div>
             <div className="inputGroup">
               <div className="inputContainer" id="passwordContainer" style={{ borderBottom: errorPassword ? '3px solid #e87c03' : 'none' }}>
@@ -171,9 +171,9 @@ export default function SignIn() {
                 <button id="show-password" style={{ display: togglePasswordButton ? 'block' : 'none' }}
                   onClick={(handleShowPassword)} className="show-password">{showPassword ? "GİZLE" : "GÖSTER"}</button>
               </div>
-              {errorPassword ? <div className="error">Parola 4 ile 60 karakter olmalıdır.</div> : undefined}
+              {errorPassword ? <div id="wrongPassMsgContainer" className="error">Parola 4 ile 60 karakter olmalıdır.</div> : undefined}
             </div>
-            <button disabled={loading} type="submit" formNoValidate>{loading ? <Spinner style={{ margin: 'auto' }} /> : "Oturum Aç"}</button>
+            <button id="login-button" disabled={loading} type="submit" formNoValidate>{loading ? <Spinner style={{ margin: 'auto' }} /> : "Oturum Aç"}</button>
             <div className="infoContainer">
               <div className='rememberMe'>
                 <input id="rememberMe" type="checkbox" />Beni Hatırla
