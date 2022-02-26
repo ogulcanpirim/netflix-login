@@ -1,68 +1,43 @@
 const { expect } = require("chai");
 require("chromedriver");
-const { Builder, By, until} = require("selenium-webdriver");
+const { Builder, By, until } = require("selenium-webdriver");
 
-const BASE_URL = "http://localhost:3000/signin";
+const BASE_URL = "http://localhost:3000";
 
-describe("TEST SUITE 4", () => {
-    let driver;
-    before(async () => {
-        driver = await new Builder().forBrowser("chrome").build();
-       // await driver.get(BASE_URL);
+describe("TEST SUITE 4 (Different Browsers Test)", () => {
+  let driver;
 
-    });
+  beforeEach(async () => {
+    driver = await buildDriver();
+  });
 
-    after(() => {
-        // driver.quit();
-    });
+  afterEach(async () => {
+    await driver.quit();
+  });
 
-    beforeEach(async () => {
-        await driver.get(BASE_URL);
-
-    });
-
-    afterEach(() => {
-        // do something after test case execution is finished
-        // no matter if there are failed cases
-    });
-    /*
-    it("Check if wrong password works",  async() => {
-        // TODO:
-
-        await driver.wait(until.elementLocated(By.id('password')));
-        await wrongLogin(driver);
-        await driver.wait(until.elementLocated(By.id('message-container')));
-        let errorMessage = await driver.findElement(By.id('message-container')).getText();
-        expect(errorMessage).to.equal("Parola yanlış. Lütfen yeniden deneyin ya da parolanızı sıfırlayın");
-    });
-
-
-     */
-
-    it("Check if invalid email form is entered",  async() => {
-        // TODO: invalid format does not make sense
-
-        await driver.wait(until.elementLocated(By.id('email-phone')));
-        await driver.findElement(By.id("email-phone")).sendKeys("in");
-        await driver.findElement(By.id("password")).sendKeys("pass");
-        await driver.findElement(By.id("login-button")).click();
-        await driver.wait(until.elementLocated(By.id('email-error-message')));
-        let errorMessage = await driver.findElement(By.id("email-error-message")).getText();
-        expect(errorMessage).to.equal("Lütfen geçerli bir telefon numarası veya e-posta adresi girin.");
-    });
-    it("Check if a too short password is entered",  async() => {
-        await driver.wait(until.elementLocated(By.id('password')));
-        await driver.findElement(By.id("password")).sendKeys("pas");
-        await driver.findElement(By.id("login-button")).click();
-        let errorMessage = await driver.findElement(By.id("wrongPassMsgContainer")).getText();
-        expect(errorMessage).to.equal("Parola 4 ile 60 karakter olmalıdır.");
-    });
-
+  it("Verifies if a user should be able to login with the same credentials in different browsers at the same time.", async () => {
+    // Login with chrome
+    await login(driver);
+    // Login with firefox
+    const firefoxDriver = await new Builder().forBrowser("firefox").build();
+    await login(firefoxDriver);
+    // Check titles
+    const chromeTitle = await driver.getTitle();
+    const firefoxTitle = await firefoxDriver.getTitle();
+    expect(chromeTitle).to.equal(firefoxTitle).to.equal("Netflix Home");
+    firefoxDriver.quit();
+  });
 });
-const wrongLogin = async (driver) => {
-    await driver.findElement(By.id("email-phone")).sendKeys("adbul@gmail.com");
-    await driver.findElement(By.id("password")).sendKeys("wrongPass");
-    await driver.findElement(By.id("login-button")).click();
+
+// ========================= UTIL Funcs =====================
+const buildDriver = async () => (driver = await new Builder().forBrowser("chrome").build());
+
+const login = async (driver) => {
+  await driver.get(BASE_URL);
+  await driver.wait(until.elementLocated(By.id("email-phone")));
+  await driver.findElement(By.id("email-phone")).sendKeys("elham@gmail.com");
+  await driver.findElement(By.id("password")).sendKeys("elham123");
+  await driver.findElement(By.id("login-button")).click();
+  // Wait to fully log in
+  await driver.wait(until.elementLocated(By.id("logout_button")));
 };
-
-
