@@ -96,8 +96,6 @@ export default function SignIn() {
       rememberUser(remember);
 
       if (!emailError && !passwordError) {
-        console.log("emailPhone: " + emailPhone);
-        console.log("password: " + password);
         setErrorEmail(false);
         setErrorPassword(false);
 
@@ -107,7 +105,6 @@ export default function SignIn() {
         } catch (err) {
           const errorCode = err.code;
 
-          console.log("errorCode: " + errorCode);
           if (errorCode.includes("wrong-password")) {
             setValidMessage("Parola yanlış. Lütfen yeniden deneyin ya da parolanızı sıfırlayın");
           } else if (errorCode.includes("invalid-email") || errorCode.includes("user-not-found")) {
