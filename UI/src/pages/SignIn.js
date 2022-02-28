@@ -1,4 +1,4 @@
-import { getAuth, signInAnonymously, signInWithEmailAndPassword } from "firebase/auth";
+import { FacebookAuthProvider, getAuth, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useCallback, useEffect, useState } from "react";
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
@@ -74,16 +74,15 @@ export default function SignIn() {
     }
   };
 
-  const signInAnonymous = async() => {
+  const signInWithFacebook = async () => {
 
-    //sign in anonymously without credentials
-    try {
-        await signInAnonymously(auth);
-        window.location.href = "/home";
-    } catch (error) {
-        console.log(error);
-    }
-  };
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((response) => {
+        console.log("response", response);
+      })
+  }
+
 
   const handleSubmit = useCallback(
     async (e) => {
@@ -188,7 +187,7 @@ export default function SignIn() {
               </a>
             </div>
           </form>
-          <button onClick={signInAnonymous} className="fb-block" id="login-fb-button">
+          <button onClick={signInWithFacebook} className="fb-block" id="login-fb-button">
             <img className="fb-logo" src="https://assets.nflxext.com/ffe/siteui/login/images/FB-f-Logo__blue_57.png" alt="facebook-logo" />
             <div className="fb-text">Facebook ile Oturum Aç</div>
           </button>
