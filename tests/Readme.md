@@ -5,8 +5,10 @@
 
       npm install -g npm
 
-- Install Chrome browser
+- Install Chrome and Firefox browsers
+- Install [Firefox driver](https://github.com/mozilla/geckodriver/releases) and [Chrome driver](https://chromedriver.chromium.org/downloads)
+- Add the path to the drivers to you system path eenvirontment
 - Build and run.
 
-      npm install (only once)
-      npm test (whenver you want to run tests)
+      npm install
+      npm test
