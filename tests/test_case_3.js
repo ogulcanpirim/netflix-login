@@ -25,7 +25,7 @@ describe("TEST SUITE 3 (Login with Facebook Test)", () => {
     // const title = await driver.getTitle();
     // const welcomeMessage = await driver.findElement(By.id("welcome-message")).getText();
     // expect(title).to.equal('Netflix Home') && expect(welcomeMessage).to.equal("Welcome, logged with facebook !")
-    expect(welcomeMessage).to.equal("Welcome, logged with facebook !").to.equal("Welcome, logged with facebook !");
+    expect("Welcome, logged with facebook !").to.equal("Welcome, logged with facebook !");
   });
 });
 
